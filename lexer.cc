@@ -101,6 +101,24 @@ Token LexicalAnalyzer::ScanNumber()
                 input.UngetChar(c);
             }
         }
+
+        if (c == 'X' || c == 'x') {
+                tmp.lexeme += c;
+                input.GetChar(c);
+            if (!input.EndOfInput()) {
+                input.UngetChar(c);
+            }
+
+            while (!input.EndOfInput() && isdigit(c)) {
+                tmp.lexeme += c;
+                input.GetChar(c);
+            }
+            if (!input.EndOfInput()) {
+                input.UngetChar(c);
+            }
+
+        }
+
         // TODO: You can check for REALNUM, BASE08NUM and BASE16NUM here!
         tmp.token_type = NUM;
         tmp.line_no = line_no;
