@@ -93,7 +93,7 @@ Token LexicalAnalyzer::ScanNumber()
             tmp.lexeme = "0";
         } else {
             tmp.lexeme = "";
-            while (!input.EndOfInput() && isdigit(c)) {
+            while (!input.EndOfInput() && isalnum(c) && c != 'X' && c != 'x') {
                 tmp.lexeme += c;
                 input.GetChar(c);
             }
@@ -145,7 +145,6 @@ Token LexicalAnalyzer::ScanNumber()
             input.GetChar(c);
             if (isdigit(c)) {
                 tmp.lexeme += '.';
-                tmp.lexeme += c;
                 tmp.token_type = REALNUM;
 
 
